@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Humidity Wallpaper</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial, sans-serif;
+    }
+
+    body{
+      height:100vh;
+      overflow:hidden;
+      background:url('https://images.unsplash.com/photo-1506744038136-46273834b3fb')
+      center/cover no-repeat;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+
+    .overlay{
+      position:absolute;
+      inset:0;
+      background:rgba(0,0,0,0.35);
+      backdrop-filter: blur(3px);
+    }
+
+    .weather-card{
+      position:relative;
+      z-index:2;
+      width:320px;
+      padding:30px;
+      border-radius:25px;
+      background:rgba(255,255,255,0.15);
+      border:1px solid rgba(255,255,255,0.3);
+      box-shadow:0 8px 32px rgba(0,0,0,0.3);
+      backdrop-filter: blur(12px);
+      text-align:center;
+      color:white;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float{
+      0%,100%{
+        transform:translateY(0px);
+      }
+      50%{
+        transform:translateY(-10px);
+      }
+    }
+
+    .emoji{
+      font-size:70px;
+      margin-bottom:10px;
+    }
+
+    h1{
+      font-size:32px;
+      margin-bottom:10px;
+    }
+
+    .humidity{
+      font-size:60px;
+      font-weight:bold;
+      margin:20px 0;
+      color:#00e5ff;
+    }
+
+    .label{
+      font-size:22px;
+      letter-spacing:2px;
+      opacity:0.9;
+    }
+
+    .city{
+      margin-top:15px;
+      font-size:20px;
+      opacity:0.85;
+    }
+
+    .bar{
+      width:100%;
+      height:18px;
+      background:rgba(255,255,255,0.2);
+      border-radius:20px;
+      overflow:hidden;
+      margin-top:20px;
+    }
+
+    .fill{
+      height:100%;
+      width:78%;
+      background:linear-gradient(90deg,#00e5ff,#00c853);
+      border-radius:20px;
+      animation: fillBar 2s ease;
+    }
+
+    @keyframes fillBar{
+      from{
+        width:0;
+      }
+      to{
+        width:78%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="overlay"></div>
+
+<div class="weather-card">
+  <div class="emoji">💧</div>
+
+  <h1>Humidity</h1>
+
+  <div class="humidity" id="humidityValue">
+    78%
+  </div>
+
+  <div class="label">
+    Air Moisture Level
+  </div>
+
+  <div class="bar">
+    <div class="fill"></div>
+  </div>
+
+  <div class="city" id="cityName">
+    Pune, India
+  </div>
+</div>
+
+<script>
+  // Example dynamic humidity animation
+
+  let humidity = 78;
+  const humidityText = document.getElementById("humidityValue");
+
+  setInterval(() => {
+    humidity = Math.floor(60 + Math.random() * 40);
+
+    humidityText.innerText = humidity + "%";
+
+    document.querySelector(".fill").style.width = humidity + "%";
+  }, 4000);
+</script>
+
+</body>
+</html>
